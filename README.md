@@ -12,5 +12,5 @@ A. See above.
 
 Manual steps this program solves:
 - Creating a .desktop file for an app/program
-- Copying .desktop file to ~/.local/share/applications
+- Copying .desktop file to ~/.local/share/applications to ensure it appears in dashboard
 - Validating the file and checking for errors
