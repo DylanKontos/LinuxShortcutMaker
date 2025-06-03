@@ -7,9 +7,6 @@ This program will ensure your program/package/application has:
 This program is written in C# and when built, creates a natively executable filetype for Linux (run like so: ./Shortcutter).
 So no .dll file and no requirement for dotnet installation.
 
-Q. Why not Shell or Python?
-A. See above.
-
 Manual steps this program solves:
 - Creating a .desktop file for an app/program
 - Copying .desktop file to ~/.local/share/applications to ensure it appears in dashboard
