@@ -6,7 +6,7 @@ public class PackageSearcher
     private static PackageSearcher? _instance; // Singleton instance
     private PackageSearcher() { } // Private constructor
     
-    public static PackageSearcher Instance // ✅ This must exist!
+    public static PackageSearcher Instance // public static method to get the _instance
     {
         get
         {
@@ -26,7 +26,7 @@ public class PackageSearcher
         {
             Process process = new Process();
             process.StartInfo.FileName = "/bin/bash";
-            process.StartInfo.Arguments = $"-c \"find / -name '{currentSelection}' 2>/dev/null\"";
+            process.StartInfo.Arguments = $"-c \"find / -iname '{currentSelection}' 2>/dev/null\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
@@ -36,7 +36,8 @@ public class PackageSearcher
             string result = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
             
-            Console.WriteLine("find Search Results:\n" + result);
+            if (string.IsNullOrEmpty(result))  { Console.WriteLine("find NO MATCHES"); }
+            else { Console.WriteLine("find Search Results:\n" + result); }
         }
         
         catch (Exception ex)
@@ -53,7 +54,7 @@ public class PackageSearcher
         {
             Process process = new Process();
             process.StartInfo.FileName = "/bin/bash";
-            process.StartInfo.Arguments = $"-c \"dpkg --list | grep '{currentSelection}'\"";
+            process.StartInfo.Arguments = $"-c \"dpkg --list | grep -i '{currentSelection}'\"";
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
@@ -61,7 +62,10 @@ public class PackageSearcher
             process.Start();
             string result = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
-            Console.WriteLine("dpkg Search Results:\n" + result);
+            
+            if (string.IsNullOrEmpty(result))  { Console.WriteLine("DpkgSearch NO MATCHES"); }
+
+            else{ Console.WriteLine("dpkg Search Results:\n" + result); }
         }
 
         catch (Exception ex)

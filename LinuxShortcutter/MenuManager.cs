@@ -16,7 +16,6 @@ public class MenuManager
             
             packageSearcher.FindPackage(currentSelection);
             packageSearcher.DpkgSearch(currentSelection);
-            
         }
     }
 }
